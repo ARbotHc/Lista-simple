@@ -1,0 +1,87 @@
+public class LIsta {
+
+  class Node {
+    Object elem;
+    Node Next;
+
+    public Node(Object o) {
+      elem = o;
+      Next = null;
+    }
+  }
+
+  Node end;
+  int size;
+
+  public Lista() {
+    end = null;
+    size = 0;
+  }
+
+  public void push(Object o) {
+    Node new_node = new Node(o);
+    if (end == null)
+      end = new_node;
+    else {
+      new_node.Next = end;
+      end = new_node;
+    }
+    size++;
+  }; 
+
+  public Object pop() {
+    if (end == null)
+      return null;
+    ;
+    Object o = end.elem;
+    end = end.Next;
+    size--;
+    return o;
+  }
+
+  public boolean isEmpty() {
+
+    return (size == 0);
+  }
+
+  public int size() {
+
+    return size;
+  }
+
+  public Object end() {
+
+    if (end == null)
+      return null;
+    else
+      return end.elem;
+  }
+
+public static void main(String args[]) {
+
+    FileReader f = null; 
+    BufferedReader reader = null; 
+    String line = null; 
+    LinkedStack stack = new LinkedStack(); 
+
+    if (args.length < 1) {
+      System.err.println("Please invoke the program like this:");
+      System.err.println("\tLinkedStack file");
+    }
+
+    try {
+      f = new FileReader(args[0]);
+      reader = new BufferedReader(f);
+      while ((line = reader.readLine()) != null)
+        stack.push(line);
+    } catch (Exception e) {
+      System.err.println("File not found " + args[0]);
+      return;
+    }
+
+    while ((line = (String) stack.pop()) != null) {
+      System.out.println(line);
+    }
+  }
+
+}
